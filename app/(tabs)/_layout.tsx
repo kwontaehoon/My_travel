@@ -10,25 +10,54 @@ export default function TabLayout() {
 
   return (
     <Tabs
+      initialRouteName='index'
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
+        tabBarStyle: {paddingBottom: 2}
       }}>
       <Tabs.Screen
-        name="index"
+        name="search"
         options={{
-          title: 'Home',
+          title: '검색',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <TabBarIcon name={focused ? 'search' : 'search-outline'} size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="course"
         options={{
-          title: 'Explore',
+          title: '코스',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'airplane' : 'airplane-outline'} size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: '홈',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="test"
+        options={{
+          title: '테스트',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="mypage"
+        options={{
+          title: '마이페이지',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'accessibility' : 'accessibility-outline'} size={24} color={color} />
           ),
         }}
       />

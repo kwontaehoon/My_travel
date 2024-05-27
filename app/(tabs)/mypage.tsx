@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     bottom: -90,
     left: -35,
     position: 'absolute',
+    borderWidth: 2
   },
   titleContainer: {
     flexDirection: 'row',
