@@ -4,6 +4,7 @@ import Test from '@/components/test'
 import { ThemedText } from '../ThemedText'
 import { StyleSheet } from 'react-native'
 import { TabBarIcon } from '../navigation/TabBarIcon'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const index = () => {
   return (
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         gap: 8,
-        paddingRight: 5
+        padding: 8,
     },
   });
 
