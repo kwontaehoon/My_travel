@@ -33,9 +33,13 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen
-        name="test"
-        options={{ headerTitle: '11' }}
-      />
+          name="test"
+          options={{ headerTitle: '11' }}
+        />
+        <Stack.Screen
+          name="stack/settings"
+          options={{ headerTitle: 'settings' }}
+        />
       </Stack>
     </ThemeProvider>
   );

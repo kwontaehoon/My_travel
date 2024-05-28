@@ -1,14 +1,13 @@
 import React from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-import { Link } from 'expo-router'
 
-const index = () => {
+const test2 = () => {
   return (
     <ThemedView>
-        <ThemedText>second</ThemedText>
+      <ThemedText>settings</ThemedText>
     </ThemedView>
   )
 }
 
-export default index
+export default test2

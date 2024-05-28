@@ -5,11 +5,12 @@ import { ThemedText } from '../ThemedText'
 import { StyleSheet } from 'react-native'
 import { TabBarIcon } from '../navigation/TabBarIcon'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Link } from 'expo-router'
 
 const index = () => {
   return (
     <ThemedView style={styles.container}>   
-        <TabBarIcon name='balloon' size={24} />
+        <Link href='stack/settings'><TabBarIcon name='balloon' size={24} /></Link>
         <TabBarIcon name='settings' size={24} />
     </ThemedView>
   )
