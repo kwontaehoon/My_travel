@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import Home from '@/components/home'
 import { ThemedText } from '@/components/ThemedText'

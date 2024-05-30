@@ -40,6 +40,14 @@ export default function RootLayout() {
           name="stack/settings"
           options={{ headerTitle: 'settings' }}
         />
+        <Stack.Screen
+          name="stack/alarm"
+          options={{ headerTitle: 'alarm' }} 
+        />
+        <Stack.Screen
+          name="stack/login"
+          options={{ headerTitle: '로그인' }}
+        />
       </Stack>
     </ThemeProvider>
   );

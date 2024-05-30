@@ -10,8 +10,8 @@ import { Link } from 'expo-router'
 const index = () => {
   return (
     <ThemedView style={styles.container}>   
-        <Link href='stack/settings'><TabBarIcon name='balloon' size={24} /></Link>
-        <TabBarIcon name='settings' size={24} />
+        <Link href='stack/alarm'><TabBarIcon name='balloon' size={24} /></Link>
+        <Link href='stack/settings'><TabBarIcon name='settings' size={24} /></Link>
     </ThemedView>
   )
 }
@@ -19,12 +19,12 @@ const index = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        height: 40,
+        height: 50,
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        gap: 8,
-        padding: 8,
+        gap: 12,
+        padding: 12,
     },
   });
 

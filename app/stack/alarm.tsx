@@ -2,12 +2,12 @@ import React from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
 
-const settings = () => {
+const alarm = () => {
   return (
     <ThemedView>
-      <ThemedText>settings</ThemedText>
+      <ThemedText>alarm</ThemedText>
     </ThemedView>
   )
 }
 
-export default settings
+export default alarm

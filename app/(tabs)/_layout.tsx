@@ -14,14 +14,14 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarStyle: {paddingBottom: 2}
+        tabBarStyle: { paddingBottom: 2 }
       }}>
       <Tabs.Screen
-        name="search"
+        name="index"
         options={{
-          title: '검색',
+          title: '홈',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'search' : 'search-outline'} size={24} color={color} />
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} size={24} color={color} />
           ),
         }}
       />
@@ -31,15 +31,6 @@ export default function TabLayout() {
           title: '코스',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'airplane' : 'airplane-outline'} size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: '홈',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} size={24} color={color} />
           ),
         }}
       />

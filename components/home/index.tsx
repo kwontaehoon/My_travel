@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    padding: 5
+    padding: 10,
   },
   pageContiner: {
     flex: 1,
