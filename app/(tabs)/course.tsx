@@ -2,13 +2,17 @@ import React from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import Course from '@/components/course'
 import { StatusBar } from 'expo-status-bar'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const course = () => {
   return (
-    <ThemedView>
-        <StatusBar />
-        <Course />
-    </ThemedView>
+    <SafeAreaView>
+      <StatusBar
+        animated={true}
+        backgroundColor="#FFFFFF"
+      />
+      <Course />
+    </SafeAreaView>
   )
 }
 

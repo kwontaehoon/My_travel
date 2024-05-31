@@ -17,7 +17,6 @@ const index = () => {
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 20

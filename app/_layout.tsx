@@ -48,6 +48,14 @@ export default function RootLayout() {
           name="stack/login"
           options={{ headerTitle: '로그인' }}
         />
+        <Stack.Screen
+          name="stack/signup"
+          options={{ headerTitle: '회원가입' }}
+        />
+        <Stack.Screen
+          name="stack/write/index"
+          options={{ headerTitle: '코스 등록' }}
+        />
       </Stack>
     </ThemeProvider>
   );
