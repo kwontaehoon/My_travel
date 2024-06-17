@@ -21,7 +21,7 @@ const index = () => {
             <ThemedText>대중교통</ThemedText>
           </ThemedView>
           <ThemedView style={styles.transportContent}>
-            <ThemedText>자량</ThemedText>
+            <ThemedText>차량</ThemedText>
           </ThemedView>
           <ThemedView style={styles.transportContent}>
             <ThemedText>도보</ThemedText>

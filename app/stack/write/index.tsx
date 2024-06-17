@@ -7,24 +7,28 @@ import { handlePreviosPage, handleNextPage } from '@/funtion/handlePagerView'
 import CountryAndDate from '@/app/stack/write/countryAndDate'
 import Test from '@/app/stack/write/test'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { headerAtom } from '@/store/course'
+import { useAtom } from 'jotai'
+import { HeaderProps } from './type'
 
 const write = () => {
 
     const pagerRef = useRef<PagerView>(null);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [dateCount, setDateCount] = useState<number>(0);
+    const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
 
     return (
         <ThemedView style={styles.container}>
             <ThemedView style={styles.header}>
-                <ThemedView style={styles.headerTitle}>
+                {header.date !== 0 && <ThemedView style={styles.headerTitle}>
                     <TabBarIcon name="calendar-clear" size={15} style={{marginRight: 4}} />
                     <ThemedText>총 5일</ThemedText>
-                </ThemedView>
-                <ThemedView style={styles.headerTitle}>
-                    <TabBarIcon name="people" size={15} style={{marginRight: 4}} />
-                    <ThemedText>2명</ThemedText>
-                </ThemedView>
+                </ThemedView>}
+                {header.country && <ThemedView style={styles.headerTitle}>
+                    <TabBarIcon name="flag" size={15} style={{marginRight: 4}} />
+                    <ThemedText>대한민국</ThemedText>
+                </ThemedView>}
             </ThemedView>
             <PagerView
                 style={styles.pageContiner}
