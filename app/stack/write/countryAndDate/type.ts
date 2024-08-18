@@ -1,4 +1,5 @@
-export interface DateCountProps {
-    dateCount: number;
-    setDateCount: (dateCount: number) => void;
+export interface HeaderProps {
+    date: number;
+    country: string;
+    local: string;
 }

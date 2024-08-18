@@ -4,12 +4,11 @@ import { ThemedText } from '@/components/ThemedText'
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { buttonCount } from '@/funtion/buttonCount'
-import { DateCountProps } from './type'
 import { useAtom } from 'jotai';
-import { HeaderProps } from '../type';
+import { HeaderProps } from './type';
 import { headerAtom } from '@/store/course';
 
-const index = ({ dateCount, setDateCount }: DateCountProps) => {
+const index = () => {
 
   const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
 
@@ -22,12 +21,12 @@ const index = ({ dateCount, setDateCount }: DateCountProps) => {
         </ThemedView>
         <ThemedView style={styles.dateButton}>
           <TouchableOpacity style={styles.countButton} 
-            onPress={()=>buttonCount(header.date, setHeader, 'subtract')}>
+            onPress={()=>buttonCount(header, setHeader, 'subtract')}>
             <TabBarIcon name="remove" />
           </TouchableOpacity>
-          <ThemedText style={styles.count}>{dateCount}</ThemedText>
+          <ThemedText style={styles.count}>{header.date}</ThemedText>
           <TouchableOpacity style={styles.countButton}
-            onPress={()=>buttonCount(header.date, setHeader,'add')}>
+            onPress={()=>buttonCount(header, setHeader,'add')}>
             <TabBarIcon name="add" />
           </TouchableOpacity>
         </ThemedView>

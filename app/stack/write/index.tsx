@@ -15,15 +15,14 @@ const write = () => {
 
     const pagerRef = useRef<PagerView>(null);
     const [currentPage, setCurrentPage] = useState<number>(0);
-    const [dateCount, setDateCount] = useState<number>(0);
     const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
 
     return (
         <ThemedView style={styles.container}>
             <ThemedView style={styles.header}>
-                {header.date !== 0 && <ThemedView style={styles.headerTitle}>
+                {header.date > 0 && <ThemedView style={styles.headerTitle}>
                     <TabBarIcon name="calendar-clear" size={15} style={{marginRight: 4}} />
-                    <ThemedText>총 5일</ThemedText>
+                    <ThemedText>총 {header.date}일</ThemedText>
                 </ThemedView>}
                 {header.country && <ThemedView style={styles.headerTitle}>
                     <TabBarIcon name="flag" size={15} style={{marginRight: 4}} />
@@ -37,10 +36,11 @@ const write = () => {
                 scrollEnabled={false}
                 onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}>
                 <ThemedView key="1">
-                    <CountryAndDate dateCount={dateCount} setDateCount={setDateCount} />
+                    {/* <CountryAndDate /> */}
+                    <Test />
                 </ThemedView>
                 <ThemedView key="2">
-                    <Test />
+                    {/* <Test /> */}
                 </ThemedView>
             </PagerView>
             <ThemedView style={styles.button}>

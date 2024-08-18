@@ -1,4 +1,3 @@
-import { headerAtom } from '@/store/course';
 import { SetStateAction } from 'jotai';
 
 export interface HeaderProps {
@@ -7,13 +6,10 @@ export interface HeaderProps {
     local: string;
 }
 
-interface ButtonCountProps {
-    count: number;
-    setCount: (count: number | SetStateAction<HeaderProps>) => void;
-    flag: 'add' | 'subtract';
-}
+export const buttonCount = (count: number | HeaderProps, setCount: (update: SetStateAction<number> | SetStateAction<HeaderProps>) => void, flag: string) => {
 
-export const buttonCount = (count: number, setCount: SetStateAction<HeaderProps>, flag: string) => {
+    console.log("count: ", count);
+
     if (typeof count === 'number') {
         if(flag == 'add'){
             setCount(count + 1);
@@ -22,9 +18,11 @@ export const buttonCount = (count: number, setCount: SetStateAction<HeaderProps>
         }
     }else{
         if(flag == 'add'){
-            setCount(prevState => ({ ...prevState, date: prevState.date + 1 }));
+            console.log("aa: ", count);
+            setCount((prev:any) => ({ ...prev, date: prev.date + 1 }));
         }else {
-            count === 0 ? '' : setCount(prevState => ({ ...prevState, date: prevState.date - 1 }));
+            console.log("bb: ", count);
+            count.date === 0 ? '' : setCount((prev:any) => ({ ...prev, date: prev.date - 1 }));
         }
     }
 }   

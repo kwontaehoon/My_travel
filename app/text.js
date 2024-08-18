@@ -1,0 +1,1 @@
+const arr = Array(0).fill(3)
