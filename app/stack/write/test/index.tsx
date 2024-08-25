@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedTouchView } from '@/components/ThemedTouchView'
-import { StyleSheet, TextInput, TouchableOpacity, FlatList, Touchable } from 'react-native'
+import { StyleSheet, TextInput, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { TourProps } from './type';
 import { transportText } from '@/constants/text/Transport';
@@ -10,7 +10,7 @@ import { checkBbox } from '@/funtion/checkBox'
 import { useImagePicker } from '@/hooks/useImagePicker'
 
 
-const index = () => {
+const index = (alldData: object[]) => {
 
   const [tour, setTour] = useState<TourProps[]>([{ // 관광지 이름
     id: 0,
@@ -19,8 +19,17 @@ const index = () => {
 
   const [transport, setTransport] = useState<boolean[]>(Array(3).fill(false)); // 대중교통 select
 
-  const { image, pickImage } = useImagePicker();
+  let { image, pickImage } = useImagePicker();
   console.log('image: ', image);
+
+  let [imageArr, setImageArr] = useState<object[]>([]);
+  console.log("imageArr: ", imageArr); 
+
+  useEffect(() => {
+    if(image){
+      setImageArr([...imageArr, image]);
+    }
+  }, [image]);
 
   return (
     <FlatList data={[0]}
@@ -60,9 +69,14 @@ const index = () => {
           </ThemedView>
           <ThemedView style={styles.img}>
             <ThemedText style={styles.imgText}>이미지를 첨부해주세요(최대 10개)</ThemedText>
-            <ThemedView style={styles.imgSelect}>
+            <ScrollView horizontal style={styles.imgSelect}>
+              {imageArr.map((x, index) => {
+                return (
+                  <Image key={index} style={styles.imgContent} source={{ uri: x.uri }} />
+                )
+              })}
               <ThemedTouchView style={styles.imgContent} onPress={pickImage}></ThemedTouchView>
-            </ThemedView>
+            </ScrollView>
           </ThemedView>
         </ThemedView>
       }>
@@ -120,7 +134,9 @@ const styles = StyleSheet.create({
   imgContent: {
     borderWidth: 1,
     width: 100,
-    height: 100
+    height: 100,
+    marginRight: 5,
+    marginLeft: 5
   }
 });
 

@@ -17,6 +17,8 @@ const write = () => {
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
 
+    const [allData, setAllData] = useState<{ id: number }>();
+
     return (
         <ThemedView style={styles.container}>
             <ThemedView style={styles.header}>
@@ -36,11 +38,11 @@ const write = () => {
                 scrollEnabled={false}
                 onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}>
                 <ThemedView key="1">
-                    {/* <CountryAndDate /> */}
-                    <Test />
+                    <CountryAndDate allData={allData}/>
+                    {/* <Test /> */}
                 </ThemedView>
                 <ThemedView key="2">
-                    {/* <Test /> */}
+                    <Test allData={allData} />
                 </ThemedView>
             </PagerView>
             <ThemedView style={styles.button}>

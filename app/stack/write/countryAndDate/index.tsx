@@ -8,9 +8,14 @@ import { useAtom } from 'jotai';
 import { HeaderProps } from './type';
 import { headerAtom } from '@/store/course';
 
-const index = () => {
+interface SomeComponentProps {
+  info?: number
+}
+
+const index = (allData:  SomeComponentProps) => {
 
   const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
+  console.log(allData);
 
   return (
     <ThemedView style={styles.container}>
