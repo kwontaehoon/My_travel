@@ -3,7 +3,14 @@ import * as ImagePicker from 'expo-image-picker';
 
 // 커스텀 훅 정의
 export function useImagePicker() {
-    const [image, setImage] = useState<object[]>();
+
+  interface ImageProps {
+    id: string;
+    uri: string;
+    fileName: string;
+  };
+
+    const [image, setImage] = useState<ImageProps[]>();
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library

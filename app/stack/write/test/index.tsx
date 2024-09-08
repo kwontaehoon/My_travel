@@ -20,10 +20,8 @@ const index = (alldData: object[]) => {
   const [transport, setTransport] = useState<boolean[]>(Array(3).fill(false)); // 대중교통 select
 
   let { image, pickImage } = useImagePicker();
-  console.log('image: ', image);
 
   let [imageArr, setImageArr] = useState<object[]>([]);
-  console.log("imageArr: ", imageArr); 
 
   useEffect(() => {
     if(image){
@@ -51,7 +49,7 @@ const index = (alldData: object[]) => {
               </TouchableOpacity>
             </ThemedView>
           </ThemedView>
-          <ThemedView style={styles.transport}>
+          {/* <ThemedView style={styles.transport}>
             <ThemedText style={styles.transportText}>이동수단을 선택해주세요</ThemedText>
             <ThemedView style={styles.transportSelect}>
               {transportText.map((x, index) => {
@@ -66,10 +64,10 @@ const index = (alldData: object[]) => {
                 )
               })}
             </ThemedView>
-          </ThemedView>
+          </ThemedView> */}
           <ThemedView style={styles.img}>
             <ThemedText style={styles.imgText}>이미지를 첨부해주세요(최대 10개)</ThemedText>
-            <ScrollView horizontal style={styles.imgSelect}>
+            <ScrollView horizontal style={styles.imgSelect} showsHorizontalScrollIndicator={false}>
               {imageArr.map((x, index) => {
                 return (
                   <Image key={index} style={styles.imgContent} source={{ uri: x.uri }} />
@@ -136,7 +134,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginRight: 5,
-    marginLeft: 5
+    marginLeft: 5,
+    borderRadius: 5
   }
 });
 

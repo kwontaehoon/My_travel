@@ -1,50 +1,73 @@
 import React, { useState } from 'react'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { FlatList, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { buttonCount } from '@/funtion/buttonCount'
 import { useAtom } from 'jotai';
 import { HeaderProps } from './type';
 import { headerAtom } from '@/store/course';
+import { ThemedTouchView } from '@/components/ThemedTouchView';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 interface SomeComponentProps {
   info?: number
 }
 
-const index = (allData:  SomeComponentProps) => {
+const index = (allData: SomeComponentProps) => {
 
   const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
-  console.log(allData);
+  const [selected, setSelected] = useState('');
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedView style={styles.date}>
-        <ThemedView style={styles.dateTitle}>
-          <ThemedText>기간</ThemedText>
-          <ThemedText>총 여행 기간</ThemedText>
+    <FlatList data={Array(1).fill(false)}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) =>
+        <ThemedView style={styles.container}>
+          <ThemedView style={styles.date}>
+            <ThemedView style={styles.dateTitle}>
+              <ThemedText>기간</ThemedText>
+              <ThemedText>총 여행 기간</ThemedText>
+            </ThemedView>
+            <ThemedView style={styles.dateButton}>
+              <TouchableOpacity style={styles.countButton}
+                onPress={() => buttonCount(header, setHeader, 'subtract')}>
+                <TabBarIcon name="remove" />
+              </TouchableOpacity>
+              <ThemedText style={styles.count}>{header.date}</ThemedText>
+              <TouchableOpacity style={styles.countButton}
+                onPress={() => buttonCount(header, setHeader, 'add')}>
+                <TabBarIcon name="add" />
+              </TouchableOpacity>
+            </ThemedView>
+          </ThemedView>
+          <ThemedTouchView style={styles.calendarBox}>
+            <ThemedView style={styles.calendar}>
+              <ThemedText>달력</ThemedText>
+            </ThemedView>
+            <TabBarIcon name='arrow-down' size={20} />
+          </ThemedTouchView>
+          <Calendar
+            onDayPress={day => {
+              setSelected(day.dateString);
+            }}
+            markedDates={{
+              [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+            }}
+          />
+
+          <ThemedView style={styles.country}>
+            <ThemedText>나라를 입력해주세요</ThemedText>
+            <TextInput style={styles.textInput} />
+          </ThemedView>
+          <ThemedView style={styles.local}>
+            <ThemedText>지역을 입력해주세요</ThemedText>
+            <TextInput style={styles.textInput} />
+          </ThemedView>
         </ThemedView>
-        <ThemedView style={styles.dateButton}>
-          <TouchableOpacity style={styles.countButton} 
-            onPress={()=>buttonCount(header, setHeader, 'subtract')}>
-            <TabBarIcon name="remove" />
-          </TouchableOpacity>
-          <ThemedText style={styles.count}>{header.date}</ThemedText>
-          <TouchableOpacity style={styles.countButton}
-            onPress={()=>buttonCount(header, setHeader,'add')}>
-            <TabBarIcon name="add" />
-          </TouchableOpacity>
-        </ThemedView>
-      </ThemedView>
-      <ThemedView style={styles.country}>
-        <ThemedText>나라를 입력해주세요</ThemedText>
-        <TextInput style={styles.textInput}/>
-      </ThemedView>
-      <ThemedView style={styles.local}>
-        <ThemedText>지역을 입력해주세요</ThemedText>
-        <TextInput style={styles.textInput}/>
-      </ThemedView>
-    </ThemedView>
+      }>
+    </FlatList>
+
   )
 }
 
@@ -75,12 +98,25 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20
   },
+  calendarBox: {
+    borderWidth: 1,
+    padding: 9,
+    borderRadius: 10,
+    marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  calendar: {
+    flex: 1,
+  },
   country: {
     marginBottom: 20
   },
   textInput: {
-    borderBottomWidth: 1,
+    borderWidth: 1,
     marginTop: 8,
+    borderRadius: 10,
+    padding: 3,
   },
   local: {
 
