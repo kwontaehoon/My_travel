@@ -18,7 +18,6 @@ export const buttonCount = (count: number | HeaderProps, setCount: (update: SetS
         }
     }else{
         if(flag == 'add'){
-            console.log("aa: ", count);
             setCount((prev:any) => ({ ...prev, date: prev.date + 1 }));
         }else {
             console.log("bb: ", count);

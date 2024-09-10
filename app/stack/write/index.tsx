@@ -7,6 +7,7 @@ import { handlePreviosPage, handleNextPage } from '@/funtion/handlePagerView'
 import Transport from '@/app/stack/write/transport'
 import CountryAndDate from '@/app/stack/write/countryAndDate'
 import Test from '@/app/stack/write/test'
+import Finish from '@/app/stack/write/finish'
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { headerAtom } from '@/store/course'
 import { useAtom } from 'jotai'
@@ -48,6 +49,9 @@ const write = () => {
                     </ThemedView>
                     <ThemedView key="2">
                         <Test allData={allData} />
+                    </ThemedView>
+                    <ThemedView key="3">
+                        <Finish allData={allData} />                       
                     </ThemedView>
                 </PagerView>
             </ThemedView>

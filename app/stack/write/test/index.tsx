@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     borderRadius: 5,
-    padding: 3,
+    padding: 5,
   },
   plus: {
     alignItems: 'center'

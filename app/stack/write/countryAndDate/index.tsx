@@ -18,6 +18,7 @@ const index = (allData: SomeComponentProps) => {
 
   const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
   const [selected, setSelected] = useState('');
+  const [calendarDisplay, setCalendarDisplay] = useState<boolean>(false);
 
   return (
     <FlatList data={Array(1).fill(false)}
@@ -41,20 +42,22 @@ const index = (allData: SomeComponentProps) => {
               </TouchableOpacity>
             </ThemedView>
           </ThemedView>
-          <ThemedTouchView style={styles.calendarBox}>
+          <ThemedTouchView style={styles.calendarBox}
+            onPress={()=>setCalendarDisplay(!calendarDisplay)}>
             <ThemedView style={styles.calendar}>
               <ThemedText>달력</ThemedText>
             </ThemedView>
             <TabBarIcon name='arrow-down' size={20} />
           </ThemedTouchView>
-          <Calendar
-            onDayPress={day => {
-              setSelected(day.dateString);
-            }}
-            markedDates={{
-              [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
-            }}
-          />
+          {calendarDisplay &&
+            <Calendar
+              onDayPress={day => {
+                setSelected(day.dateString);
+              }}
+              markedDates={{
+                [selected]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }
+              }}
+            />}
 
           <ThemedView style={styles.country}>
             <ThemedText>나라를 입력해주세요</ThemedText>
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 8,
     borderRadius: 10,
-    padding: 3,
+    padding: 5,
   },
   local: {
 
