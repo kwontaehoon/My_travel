@@ -3,7 +3,7 @@ import { ThemedView } from '@/components/ThemedView'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-const index = ({allData}): object[] => {
+const index = ({allData, setAllData}): object[] => {
 
     console.log('finish allData: ', allData);
 

@@ -7,7 +7,12 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon'
 import { ThemedTouchView } from '@/components/ThemedTouchView'
 import { handleNextPage } from '@/funtion/handlePagerView'
 
-const index = ({allData, currentPage, setCurrentPage, pagerRef}) => {
+const index = ({allData, setAllData, currentPage, setCurrentPage, pagerRef}) => {
+
+    const nextFunc = (e:string) => {
+        handleNextPage({ pagerRef, currentPage, setCurrentPage });
+        setAllData({...allData, id: e.id, transport: e.transport});
+    }
   
     return (
         <ThemedView style={styles.container}>
@@ -16,7 +21,7 @@ const index = ({allData, currentPage, setCurrentPage, pagerRef}) => {
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) =>
                     <ThemedTouchView 
-                        onPress={() => handleNextPage({ pagerRef, currentPage, setCurrentPage })}
+                        onPress={()=>nextFunc(item)}
                         key={item.id} 
                         style={styles.selectBox}>
                         <ThemedView style={styles.iconBox}>

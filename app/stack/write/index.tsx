@@ -18,7 +18,8 @@ const write = () => {
     const pagerRef = useRef<PagerView>(null);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
-    const [allData, setAllData] = useState<{ id?: number }>();
+    const [allData, setAllData] = useState<{ id?: number, transport?: string, days?: number, tour?: string[] }>();
+    console.log('allData: ', allData);
 
     return (
         <ThemedView style={styles.container}>
@@ -42,16 +43,16 @@ const write = () => {
                     scrollEnabled={false}
                     onPageSelected={(e) => setCurrentPage(e.nativeEvent.position)}>
                     <ThemedView key="0">
-                        <Transport allData={allData} pagerRef={pagerRef} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                        <Transport allData={allData} setAllData={setAllData} pagerRef={pagerRef} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                     </ThemedView>
                     <ThemedView key="1">
-                        <CountryAndDate allData={allData} />
+                        <CountryAndDate allData={allData} setAllData={setAllData} />
                     </ThemedView>
                     <ThemedView key="2">
-                        <Test allData={allData} />
+                        <Test allData={allData} setAllData={setAllData} />
                     </ThemedView>
                     <ThemedView key="3">
-                        <Finish allData={allData} />                       
+                        <Finish allData={allData} setAllData={setAllData} />                       
                     </ThemedView>
                 </PagerView>
             </ThemedView>

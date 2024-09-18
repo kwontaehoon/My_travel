@@ -10,15 +10,25 @@ import { headerAtom } from '@/store/course';
 import { ThemedTouchView } from '@/components/ThemedTouchView';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
-interface SomeComponentProps {
-  info?: number
-}
-
-const index = (allData: SomeComponentProps) => {
+const index = ({allData, setAllData}) => {
 
   const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
   const [selected, setSelected] = useState('');
   const [calendarDisplay, setCalendarDisplay] = useState<boolean>(false);
+
+  const buttonCountFunc = (e:string) => {
+    if(e === 'add'){
+      buttonCount(header, setHeader, 'add')
+    }else  buttonCount(header, setHeader, 'subtract')
+
+    setAllData({...allData, days: header.date});
+  }
+
+  const inputFunc = (e:string, name: string) => {
+    if(name === 'country'){
+      setAllData({...allData, country: e});
+    } else setAllData({...allData, location: e});
+  }
 
   return (
     <FlatList data={Array(1).fill(false)}
@@ -32,12 +42,12 @@ const index = (allData: SomeComponentProps) => {
             </ThemedView>
             <ThemedView style={styles.dateButton}>
               <TouchableOpacity style={styles.countButton}
-                onPress={() => buttonCount(header, setHeader, 'subtract')}>
+                onPress={()=>buttonCountFunc('subtract')}>
                 <TabBarIcon name="remove" />
               </TouchableOpacity>
               <ThemedText style={styles.count}>{header.date}</ThemedText>
               <TouchableOpacity style={styles.countButton}
-                onPress={() => buttonCount(header, setHeader, 'add')}>
+                onPress={()=>buttonCountFunc('add')}>
                 <TabBarIcon name="add" />
               </TouchableOpacity>
             </ThemedView>
@@ -61,11 +71,11 @@ const index = (allData: SomeComponentProps) => {
 
           <ThemedView style={styles.country}>
             <ThemedText>나라를 입력해주세요</ThemedText>
-            <TextInput style={styles.textInput} />
+            <TextInput style={styles.textInput} onChangeText={(e)=>inputFunc(e, 'country')} />
           </ThemedView>
           <ThemedView style={styles.local}>
             <ThemedText>지역을 입력해주세요</ThemedText>
-            <TextInput style={styles.textInput} />
+            <TextInput style={styles.textInput} onChangeText={(e)=>inputFunc(e, 'location')} />
           </ThemedView>
         </ThemedView>
       }>
