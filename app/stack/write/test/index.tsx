@@ -8,7 +8,7 @@ import { TourProps } from './type';
 import { useImagePicker } from '@/hooks/useImagePicker'
 
 
-const index = ({alldData, setAllData}) => {
+const index = ({allData, setAllData, imageArr, setImageArr}) => {
 
   const [tour, setTour] = useState<TourProps[]>([{ // 관광지 이름
     id: 0,
@@ -17,7 +17,7 @@ const index = ({alldData, setAllData}) => {
 
   let { image, pickImage } = useImagePicker();
 
-  let [imageArr, setImageArr] = useState<object[]>([]);
+  console.log('imageArr: ', imageArr);
 
   useEffect(() => {
     if(image){
@@ -25,10 +25,13 @@ const index = ({alldData, setAllData}) => {
     }
   }, [image]);
 
-  const tourFunc = (e: string, index: number) => {
-    let arr = !alldData?.tour ? [] : alldData.tour;
-    arr[index] = e;
-    setAllData({...alldData, tour: arr});
+  const tourFunc = (e: string) => {
+    setAllData({...allData, tour: e});
+  }
+  
+  const imgDeleteFunc = (number:number) => {
+    const deletedArr = imageArr.filter((_:object, index:number) => index !== number);
+    setImageArr(deletedArr);
   }
 
   return (
@@ -37,12 +40,12 @@ const index = ({alldData, setAllData}) => {
         <ThemedView style={styles.container}>
           <ThemedView style={styles.tour}>
             <ThemedText>관광지를 입력해주세요(최대 10개)</ThemedText>
-            {tour.map((x, index) => {
+            {tour.map(x => {
               return (
                 <TextInput 
                   key={x.id} 
                   style={styles.textInput} 
-                  onChangeText={(e)=>tourFunc(e, index)} />
+                  onChangeText={(e)=>tourFunc(e)} />
               )
             })}
             <ThemedView style={styles.plus}>
@@ -59,7 +62,10 @@ const index = ({alldData, setAllData}) => {
             <ScrollView horizontal style={styles.imgSelect} showsHorizontalScrollIndicator={false}>
               {imageArr.map((x, index) => {
                 return (
-                  <Image key={index} style={styles.imgContent} source={{ uri: x.uri }} />
+                  <ThemedView key={x.fileName}>
+                    <TabBarIcon name="close"  color='black' size={15} style={styles.imgCancel} onPress={()=>imgDeleteFunc(index)} />
+                    <Image key={index} style={styles.imgContent}  source={{ uri: x.uri }} />
+                  </ThemedView>
                 )
               })}
               <ThemedTouchView style={styles.imgContent} onPress={pickImage}></ThemedTouchView>
@@ -125,6 +131,17 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginLeft: 5,
     borderRadius: 5
+  },
+  imgCancel: {
+    position: 'absolute',
+    top: 5,
+    right: 10,
+    zIndex: 50,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    borderRadius: 999
   }
 });
 

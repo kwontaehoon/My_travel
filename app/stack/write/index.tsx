@@ -18,8 +18,14 @@ const write = () => {
     const pagerRef = useRef<PagerView>(null);
     const [currentPage, setCurrentPage] = useState<number>(0);
     const [header, setHeader] = useAtom<HeaderProps>(headerAtom);
-    const [allData, setAllData] = useState<{ id?: number, transport?: string, days?: number, tour?: string[] }>();
+    const [allData, setAllData] = useState<{ id?: number, transport?: string, days?: number, tour?: string[], image?: object[] }>();
     console.log('allData: ', allData);
+
+    const [imageArr, setImageArr] = useState<object[]>([]);
+
+    const imageAddFunc = () => {
+        setAllData({...allData, image: imageArr});
+    }
 
     return (
         <ThemedView style={styles.container}>
@@ -49,7 +55,7 @@ const write = () => {
                         <CountryAndDate allData={allData} setAllData={setAllData} />
                     </ThemedView>
                     <ThemedView key="2">
-                        <Test allData={allData} setAllData={setAllData} />
+                        <Test allData={allData} setAllData={setAllData} imageArr={imageArr} setImageArr={setImageArr} />
                     </ThemedView>
                     <ThemedView key="3">
                         <Finish allData={allData} setAllData={setAllData} />                       
@@ -60,7 +66,7 @@ const write = () => {
                 <TouchableOpacity style={styles.previous} onPress={() => handlePreviosPage({ pagerRef, currentPage, setCurrentPage })}>
                     <ThemedText>이전</ThemedText>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.next} onPress={() => handleNextPage({ pagerRef, currentPage, setCurrentPage })}>
+                <TouchableOpacity style={styles.next} onPress={() => { imageAddFunc(); handleNextPage({ pagerRef, currentPage, setCurrentPage })}}>
                     <ThemedText>다음</ThemedText>
                 </TouchableOpacity>
             </ThemedView>}
